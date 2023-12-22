@@ -16,10 +16,10 @@ function Submit5() {
  }
  document.getElementById("debug").innerHTML = "1"
  document.getElementById("text3").innerHTML = JSON.stringify(input.array)
- document.getElementById("text1").innerHTML = toString(input)
+ document.getElementById("text1").innerHTML = getString(input)
 }
 
-function toString(input){
+function getString(input){
     if (isNaN(input.array[0][1])) return "NaN";
     if (!isFinite(input.array[0][1])) return "Infinity";
     var s="";
