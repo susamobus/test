@@ -39,8 +39,8 @@ function toString(input){
         else if (e[1]==1) s+="10"+q;
       }
     }
-    var op0=getOperatorIndex(input,0,0);
-    var op1=getOperatorIndex(input,1,0);
+    var op0=getOperator(input,0,0);
+    var op1=getOperator(input,1,0);
     if (!op1) s+=String(op0);
     else if (op1<3) s+="e".repeat(op1-1)+Math.pow(10,op0-Math.floor(op0))+"e"+Math.floor(op0);
     else if (op1<8) s+="e".repeat(op1)+op0;
@@ -74,15 +74,12 @@ function getOperatorIndex(array,i,i2=0){
     }
     return a[min][2]==i2&&a[min][0]==i?min:min+0.5;
   };
-/*
-  P.getOperator=function (i,i2=0,i3=1){
+
+function getOperator(input,i,i2=0){
     if (typeof i!="number") i=Number(i);
     if (typeof i2!="number") i=Number(i2);
-    if (typeof i3!="number") i=Number(i3);
-    if (!isFinite(i)) throw Error(invalidArgument+"Index out of range.");
     var ai=this.getOperatorIndex(i,i2);
-    if (Number.isInteger(ai)) return this.array[ai][i3];
+    if (Number.isInteger(ai)) return this.array[ai][1];
     else return i===0&&i2===0?10:0;
   };
-  */
 
