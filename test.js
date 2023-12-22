@@ -1,7 +1,7 @@
 function Submit() {
  var input = document.getElementById("input1").value
  var layer = document.getElementById("input2").value
- const cleanedString = inputString.replace(/\[|\]/g, '');
+ const cleanedString = input.replace(/\[|\]/g, '');
  const rows = cleanedString.split('],[');
  const array2D = rows.map(row => row.split(','));
  var array = array2D.map(row =>
@@ -81,7 +81,7 @@ function normalize(array,layer){
         x.array[0][1]=Math.log10(x.array[0][1]);
         b=true;
       }
-      while (x.array.length>=2&&x.array[0][0]===0&&x.array[0][1]<MAX_E&&x.array[1][0]==1&&x.array[1][1]&&x.array[1][2]==0&&x.array[0][2]==0){
+      while (x.array.length>=2&&x.array[0][0]===0&&x.array[0][1]<Math.log10(MAX_SAFE_INTEGER)&&x.array[1][0]==1&&x.array[1][1]&&x.array[1][2]==0&&x.array[0][2]==0){
         x.array[0][1]=Math.pow(10,x.array[0][1]);
         if (x.array[1][1]>1){
           x.array[1][1]--;
