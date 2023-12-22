@@ -39,7 +39,7 @@ function Submit2() {
 
 function Submit3() {
  let array = ProcessArray(document.getElementById("input1").value)
- document.getElementById("text1").innerHTML = JSON.stringify(array.sort(function (a,b){return b[2]-a[2]===0?b[0]-a[0]:b[2]-a[2];}));
+ document.getElementById("text1").innerHTML = JSON.stringify(array.sort(function (a,b){return a[2]-b[2]===0?a[0]-b[0]:a[2]-b[2];}));
 }
 
 function compare(first,other){
@@ -127,7 +127,7 @@ function normalize(array,layer){
     do{
       b=false;
     // Update sorting of arrays
-      x.array.sort(function (a,b){return b[2]-a[2]===0?b[0]-a[0]:b[2]-a[2];});
+      x.array.sort(function (a,b){return a[2]-b[2]===0?a[0]-b[0]:a[2]-b[2];});
       if (x.array.length>100) x.array.splice(0,x.array.length-100);
       if (!x.array.length) x.array=[[0,0,0]];
 
