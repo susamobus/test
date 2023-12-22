@@ -3,9 +3,10 @@ var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
 function ProcessArray(array) {
  const trimmedString = input.slice(2, -2);
  const arrayStrings = trimmedString.split("],[");
- return arrayStrings.map(arrayString =>
+ let result = arrayStrings.map(arrayString =>
     arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER+1 : Number(element)))
   );
+ return result 
 }
 
 function Submit1() {
@@ -22,7 +23,6 @@ function Submit1() {
 }
 
 function Submit2() {
- let temparray1 = document.getElementById("input1").value,
  let input = {
   array: ProcessArray(document.getElementById("input1").value),
   layer: document.getElementById("input2").value,
