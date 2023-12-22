@@ -20,12 +20,14 @@ function Submit5() {
 }
 
 function toString(input){
+ document.getElementById("debug").innerHTML = "2"
     if (isNaN(input.array[0][1])) return "NaN";
     if (!isFinite(input.array[0][1])) return "Infinity";
     var s="";
     if (!input.layer) s+="";
     else if (input.layer<3) s+="M".repeat(input.layer);
     else s+="M^"+input.layer+" ";
+ document.getElementById("debug").innerHTML = "3"
     for (var i=input.array.length-1;i>=0;--i){
       var e=input.array[i]
       if (e[2]>0) {
@@ -39,12 +41,15 @@ function toString(input){
         else if (e[1]==1) s+="10"+q;
       }
     }
+ document.getElementById("debug").innerHTML = "4"
     var op0=getOperator(input,0,0);
     var op1=getOperator(input,1,0);
     if (!op1) s+=String(op0);
+     document.getElementById("debug").innerHTML = "5"
     else if (op1<3) s+="e".repeat(op1-1)+Math.pow(10,op0-Math.floor(op0))+"e"+Math.floor(op0);
     else if (op1<8) s+="e".repeat(op1)+op0;
     else s+="(10^)^"+op1+" "+op0;
+ document.getElementById("debug").innerHTML = "6"
     return s;
   };
 
