@@ -4,7 +4,7 @@ function ProcessArray(array) {
  const trimmedString = array.slice(2, -2);
  const arrayStrings = trimmedString.split("],[");
  let result = arrayStrings.map(arrayString =>
-    arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER+1 : Number(element)))
+    arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER*2 : Number(element)))
   );
  return result 
 }
