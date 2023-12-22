@@ -14,7 +14,7 @@ function getOperatorIndex(array,i,i2=0){
     if (typeof i2!="number") i2=Number(i2);
     var a=array;
     var min=0,max=a.length-1;
-    if (a[max][2]<i2) return max+0.5;
+    if (a[max][2]<i2||(a[max][2]==i2&&a[max][0]<i)) return max+0.5;
     if (a[min][2]>i2) return -0.5;
     while (min<=max){
       if (a[min][2]==i2&&a[min][0]==i) return min;
