@@ -1,19 +1,87 @@
 var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
 
-function Submit() {
- var input = document.getElementById("input1").value
+function ProcessArray(array) {
+ const trimmedString = input.slice(2, -2);
+ const arrayStrings = trimmedString.split("],[");
+ return arrayStrings.map(arrayString =>
+    arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER+1 : Number(element)))
+  );
+}
+
+function Submit1() {
+ var input0 = document.getElementById("input1").value
  var layer = document.getElementById("input2").value
  const trimmedString = input.slice(2, -2);
  const arrayStrings = trimmedString.split("],[");
- var array = arrayStrings.map(arrayString =>
-    arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER+1 : Number(element)))
-  );
+ let array = ProcessArray(input)
  document.getElementById("debug").innerHTML = "1"
  document.getElementById("text3").innerHTML = JSON.stringify(array)
  let norm = normalize(array,layer)
  document.getElementById("text1").innerHTML = JSON.stringify(norm.array)
  document.getElementById("text2").innerHTML = norm.layer
 }
+
+function Submit2() {
+ let temparray1 = document.getElementById("input1").value,
+ let input = {
+  array: ProcessArray(document.getElementById("input1").value),
+  layer: document.getElementById("input2").value,
+  sign: document.getElementById("input3").value,
+ }
+ let input2 = {
+  array: ProcessArray(document.getElementById("2input1").value),
+  layer: document.getElementById("2input2").value,
+  sign: document.getElementById("2input3").value,
+ }
+ document.getElementById("debug").innerHTML = "1"
+ document.getElementById("text1").innerHTML = compare(input1,input2)
+}
+
+function compare(first,other){
+    if (isNaN(first.array[0][1])||isNaN(other.array[0][1])) return NaN;
+    if (first.array[0][1]==Infinity&&other.array[0][1]!=Infinity) return first.sign;
+    if (first.array[0][1]!=Infinity&&other.array[0][1]==Infinity) return -other.sign;
+    if (first.array.length==1&&first.array[0][1]===0&&other.array.length==1&&other.array[0][1]===0) return 0;
+    if (first.sign!=other.sign) return first.sign;
+    var m=first.sign;
+    var r;
+    if (first.layer>other.layer) r=1;
+    else if (first.layer<other.layer) r=-1;
+    else{
+      var e,f;
+      for (var i=0,l=Math.min(first.array.length,other.array.length);i<l;++i){
+        e=first.array[first.array.length-1-i];
+        f=other.array[other.array.length-1-i];
+        if (e[2]>f[2]||e[2]==f[2]&&(e[0]>f[0]||e[0]==f[0]&&e[1]>f[1])){
+          r=1;
+          break;
+        }else if (e[2]<f[2]||e[2]==f[2]&&(e[0]<f[0]||e[0]==f[0]&&e[1]<f[1])){
+          r=-1;
+          break;
+        }
+      }
+      if (r===undefined){
+        if (first.array.length==other.array.length){
+          r=0;
+        }else if (first.array.length>other.array.length){
+          e=first.array[first.array.length-l];
+          if (e[2]>=1||e[0]>10||e[1]>100){
+            r=1;
+          }else{
+            r=-1;
+          }
+        }else{
+          e=other.array[other.array.length-l];
+          if (e[2]>=1||e[0]>10||e[1]>100){
+            r=-1;
+          }else{
+            r=1;
+          }
+        }
+      }
+    }
+    return r*m;
+  };
 
 function normalize(array,layer){
     var b;
