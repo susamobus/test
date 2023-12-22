@@ -3,10 +3,12 @@ function Submit() {
  var layer = document.getElementById("input2").value
  const cleanedString = input.replace(/\[|\]/g, '');
  const rows = cleanedString.split('],[');
+ document.getElementById("debug").innerHTML = "0"
  const array2D = rows.map(row => row.split(','));
  var array = array2D.map(row =>
   row.map(value => String.fromCharCode(97 + parseInt(value)))
  )
+ document.getElementById("debug").innerHTML = "1"
  document.getElementById("text1").innerHTML = JSON.stringify(normalize(array,layer).array)
  document.getElementById("text2").innerHTML = normalize(array,layer).layer
  document.getElementById("text3").innerHTML = JSON.stringify(array)
@@ -24,6 +26,7 @@ function normalize(array,layer){
       x.layer=0;
       return x;
     }
+   document.getElementById("debug").innerHTML = "2"
     x.layer=Math.floor(x.layer);
     for (var i=0;i<x.array.length;++i){
       var e=x.array[i];
@@ -43,6 +46,7 @@ function normalize(array,layer){
         x.array=[[0,Infinity,0]];
         return x;
       }
+     document.getElementById("debug").innerHTML = "3"
       if (!Number.isInteger(e[0])) e[0]=Math.floor(e[0]);
       if (e[0]!==0&&!Number.isInteger(e[1])) e[1]=Math.floor(e[1]);
     }
@@ -52,7 +56,8 @@ function normalize(array,layer){
       x.array.sort(function (a,b){return b[2]-a[2]===0?b[0]-a[0]:b[2]-a[2];});
       if (x.array.length>100) x.array.splice(0,x.array.length-100);
       if (!x.array.length) x.array=[[0,0,0]];
-        
+
+     document.getElementById("debug").innerHTML = "4"
       if (x.array[x.array.length-1][2]>MAX_SAFE_INTEGER){
         x.layer++;
         x.array=[[0,x.array[x.array.length-1][0],0]];
@@ -72,6 +77,7 @@ function normalize(array,layer){
           b=true;
         }
       }
+     document.getElementById("debug").innerHTML = "5"
       if (x.array[0][0]===0&&x.array[0][2]===0&&x.array[0][1]>MAX_SAFE_INTEGER){
         if (x.array.length>=2&&x.array[1][0]==1){
           x.array[1][1]++;
@@ -108,6 +114,7 @@ function normalize(array,layer){
         }
         b=true;
       }
+     document.getElementById("debug").innerHTML = "6"
       for (i=1;i<x.array.length;++i){
         if (x.array[i][1]>MAX_SAFE_INTEGER){
           if (i!=x.array.length-1&&x.array[i+1][0]==x.array[i][0]+1){
@@ -137,6 +144,7 @@ function normalize(array,layer){
           x.array.splice(1,i);
           //Update splice here
           b=true;
+         document.getElementById("debug").innerHTML = "7"
         }
       }
     }while(b);
