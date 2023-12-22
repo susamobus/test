@@ -5,7 +5,9 @@ function Submit() {
  var layer = document.getElementById("input2").value
  const trimmedString = input.slice(2, -2);
  const arrayStrings = trimmedString.split("],[");
- var array = arrayStrings.map(arrayString => arrayString.split(",").map(Number));
+ var array = arrayStrings.map(arrayString =>
+    arrayString.split(",").map(element => (element.trim() === "m" ? MAX_SAFE_INTEGER : Number(element)))
+  );
  document.getElementById("debug").innerHTML = "1"
  document.getElementById("text3").innerHTML = JSON.stringify(array)
  let norm = normalize(array,layer)
