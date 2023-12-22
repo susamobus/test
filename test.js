@@ -23,7 +23,7 @@ function Submit1() {
 }
 
 function Submit2() {
- let input = {
+ let input1 = {
   array: ProcessArray(document.getElementById("input1").value),
   layer: document.getElementById("input2").value,
   sign: document.getElementById("input3").value,
