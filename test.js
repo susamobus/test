@@ -3,17 +3,14 @@ var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
 function Submit() {
  var input = document.getElementById("input1").value
  var layer = document.getElementById("input2").value
- const cleanedString = input.replace(/\[|\]/g, '');
- const rows = cleanedString.split('],[');
- document.getElementById("debug").innerHTML = "0"
- const array2D = rows.map(row => row.split(','));
- var array = array2D.map(row =>
-  row.map(value => String.fromCharCode(97 + parseInt(value)))
- )
+ const trimmedString = input.slice(2, -2);
+ const arrayStrings = trimmedString.split("],[");
+ var array = arrayStrings.map(arrayString => arrayString.split(",").map(Number));
  document.getElementById("debug").innerHTML = "1"
- document.getElementById("text1").innerHTML = JSON.stringify(normalize(array,layer).array)
- document.getElementById("text2").innerHTML = normalize(array,layer).layer
  document.getElementById("text3").innerHTML = JSON.stringify(array)
+ let norm = normalize(array,layer)
+ document.getElementById("text1").innerHTML = JSON.stringify(norm.array)
+ document.getElementById("text2").innerHTML = norm.layer
 }
 
 function normalize(array,layer){
