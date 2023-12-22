@@ -206,7 +206,7 @@ function normalize(array,layer){
         }
         if (x.array[i][0]>MAX_SAFE_INTEGER){
           if (i!=x.array.length-1&&x.array[i+1][2]==x.array[i][2]+1){
-            x.array[i+1][2]++;
+            x.array[i+1][1]++; // Upd
           }else{
             x.array.splice(i+1,0,[1,1,x.array[i][2]+1]);
           }
