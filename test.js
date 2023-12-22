@@ -1,18 +1,22 @@
- P.normalize=function (){
+function Submit() {
+ var array = document.getElementById("input1").value
+ var layer = document.getElementById("input2").value
+ document.getElementById("text1").innerHTML = JSON.stringify(normalize(array,layer))
+}
+
+function normalize(array,layer){
     var b;
-    var x=this;
-    if (ExpantaNum.debug>=ExpantaNum.ALL) console.log(x.toString());
-    if (!x.array||!x.array.length) x.array=[[0,0,0]];
-    if (x.sign!=1&&x.sign!=-1){
-      if (typeof x.sign!="number") x.sign=Number(x.sign);
-      x.sign=x.sign<0?-1:1;
+    var x = {
+     array: array,
+     layer: layer,
     }
+    if (!x.array||!x.array.length) x.array=[[0,0,0]];
     if (x.layer>MAX_SAFE_INTEGER){
       x.array=[[0,Infinity,0]];
       x.layer=0;
       return x;
     }
-    if (Number.isInteger(x.layer)) x.layer=Math.floor(x.layer);
+    x.layer=Math.floor(x.layer);
     for (var i=0;i<x.array.length;++i){
       var e=x.array[i];
       if (e[0]===null||e[0]===undefined){
@@ -35,11 +39,10 @@
       if (e[0]!==0&&!Number.isInteger(e[1])) e[1]=Math.floor(e[1]);
     }
     do{
-      if (ExpantaNum.debug>=ExpantaNum.ALL) console.log(x.toString());
       b=false;
     // Update sorting of arrays
       x.array.sort(function (a,b){return b[2]-a[2]===0?b[0]-a[0]:b[2]-a[2];});
-      if (x.array.length>ExpantaNum.maxOps) x.array.splice(0,x.array.length-ExpantaNum.maxOps);
+      if (x.array.length>100) x.array.splice(0,x.array.length-100);
       if (!x.array.length) x.array=[[0,0,0]];
         
       if (x.array[x.array.length-1][2]>MAX_SAFE_INTEGER){
@@ -52,7 +55,7 @@
         else x.array=[[0,10,0],[1,1,Math.round(x.array[0][1])]];
         b=true;
       }
-      if (x.array.length<ExpantaNum.maxOps&&x.array[0][0]!==0) x.array.unshift([0,10,0]);
+      if (x.array.length<100&&x.array[0][0]!==0) x.array.unshift([0,10,0]);
       for (i=0;i<x.array.length-1;++i){
         if (x.array[i][0]==x.array[i+1][0]){
           x.array[i][1]+=x.array[i+1][1];
