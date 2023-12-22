@@ -16,10 +16,10 @@ function Submit5() {
  }
  document.getElementById("debug").innerHTML = "1"
  document.getElementById("text3").innerHTML = JSON.stringify(input.array)
- document.getElementById("text1").innerHTML = getString(input)
+ document.getElementById("text1").innerHTML = toString(input)
 }
 
-function getString(input){
+function toString(input){
     if (isNaN(input.array[0][1])) return "NaN";
     if (!isFinite(input.array[0][1])) return "Infinity";
     var s="";
@@ -78,8 +78,8 @@ function getOperatorIndex(array,i,i2=0){
 function getOperator(input,i,i2=0){
     if (typeof i!="number") i=Number(i);
     if (typeof i2!="number") i=Number(i2);
-    var ai=this.getOperatorIndex(i,i2);
-    if (Number.isInteger(ai)) return this.array[ai][1];
+    var ai=getOperatorIndex(input,i,i2);
+    if (Number.isInteger(ai)) return input.array[ai][1];
     else return i===0&&i2===0?10:0;
   };
 
