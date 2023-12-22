@@ -77,7 +77,7 @@ function getOperatorIndex(array,i,i2=0){
 
 function getOperator(input,i,i2=0){
     if (typeof i!="number") i=Number(i);
-    if (typeof i2!="number") i=Number(i2);
+    if (typeof i2!="number") i2=Number(i2);
     var ai=getOperatorIndex(input,i,i2);
     if (Number.isInteger(ai)) return input.array[ai][1];
     else return i===0&&i2===0?10:0;
