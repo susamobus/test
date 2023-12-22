@@ -126,7 +126,7 @@ function normalize(array,layer){
     }
     do{
       b=false;
-    // Update sorting of arrays
+    // Updated
       x.array.sort(function (a,b){return a[2]-b[2]===0?a[0]-b[0]:a[2]-b[2];});
       if (x.array.length>100) x.array.splice(0,x.array.length-100);
       if (!x.array.length) x.array=[[0,0,0]];
@@ -153,7 +153,7 @@ function normalize(array,layer){
       }
      document.getElementById("debug").innerHTML = "5"
       if (x.array[0][0]===0&&x.array[0][2]===0&&x.array[0][1]>MAX_SAFE_INTEGER){
-        if (x.array.length>=2&&x.array[1][0]==1){
+        if (x.array.length>=2&&x.array[1][0]==1&&x.array[1][2]===0){ //Upd
           x.array[1][1]++;
         }else{
           x.array.splice(1,0,[1,1,0]);
@@ -211,12 +211,11 @@ function normalize(array,layer){
             x.array.splice(i+1,0,[1,1,x.array[i][2]+1]);
           }
           if (x.array[0][0]===0&&x.array[0][2]===0){
-            x.array[0][1]=x.array[i][0]+1;
+            x.array[0][1]=x.array[i][0]+1; //Upd
           }else{
-            x.array.splice(0,0,[0,x.array[i][0]+1,0]);
+            x.array.splice(0,0,[0,x.array[i][0]+1,0]); //Upd
           }
           x.array.splice(1,i);
-          //Update splice here
           b=true;
          document.getElementById("debug").innerHTML = "7"
         }
