@@ -37,6 +37,11 @@ function Submit2() {
  document.getElementById("text1").innerHTML = compare(input1,input2)
 }
 
+function Submit3() {
+ let array = ProcessArray(document.getElementById("input1").value)
+ document.getElementById("text1").innerHTML = JSON.stringify(array.sort(function (a,b){return b[2]-a[2]===0?b[0]-a[0]:b[2]-a[2];}));
+}
+
 function compare(first,other){
     if (isNaN(first.array[0][1])||isNaN(other.array[0][1])) return NaN;
     if (first.array[0][1]==Infinity&&other.array[0][1]!=Infinity) return first.sign;
