@@ -1,7 +1,15 @@
 function Submit() {
- var array = document.getElementById("input1").value
+ var input = document.getElementById("input1").value
  var layer = document.getElementById("input2").value
- document.getElementById("text1").innerHTML = JSON.stringify(normalize(array,layer))
+ const cleanedString = inputString.replace(/\[|\]/g, '');
+ const rows = cleanedString.split('],[');
+ const array2D = rows.map(row => row.split(','));
+ var array = array2D.map(row =>
+  row.map(value => String.fromCharCode(97 + parseInt(value)))
+ )
+ document.getElementById("text1").innerHTML = JSON.stringify(normalize(array,layer).array)
+ document.getElementById("text2").innerHTML = normalize(array,layer).layer
+ document.getElementById("text3").innerHTML = JSON.stringify(array)
 }
 
 function normalize(array,layer){
