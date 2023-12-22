@@ -134,7 +134,7 @@ function normalize(array,layer){
      document.getElementById("debug").innerHTML = "4"
       if (x.array[x.array.length-1][2]>MAX_SAFE_INTEGER){
         x.layer++;
-        x.array=[[0,x.array[x.array.length-1][0],0]];
+        x.array=[[0,x.array[x.array.length-1][2],0]];
         b=true;
       }else if (x.layer&&x.array.length==1&&x.array[0][0]===0){
         x.layer--;
