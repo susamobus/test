@@ -134,7 +134,7 @@ function normalize(array,layer){
      document.getElementById("debug").innerHTML = "4"
       if (x.array[x.array.length-1][2]>MAX_SAFE_INTEGER){
         x.layer++;
-        x.array=[[0,x.array[x.array.length-1][2],0]];
+        x.array=[[0,x.array[x.array.length-1][2],0]]; //Upd
         b=true;
       }else if (x.layer&&x.array.length==1&&x.array[0][0]===0){
         x.layer--;
@@ -144,7 +144,7 @@ function normalize(array,layer){
       }
       if (x.array.length<100&&x.array[0][0]!==0) x.array.unshift([0,10,0]);
       for (i=0;i<x.array.length-1;++i){
-        if (x.array[i][0]==x.array[i+1][0]){
+        if (x.array[i][0]==x.array[i+1][0]&&x.array[i][2]==x.array[i+1][2]){ //Upd
           x.array[i][1]+=x.array[i+1][1];
           x.array.splice(i+1,1);
           --i;
