@@ -9,6 +9,45 @@ function Submit4() {
  document.getElementById("text1").innerHTML = getOperatorIndex(array,i,i2)
 }
 
+function Submit5() {
+ let input = {
+  array: ProcessArray(document.getElementById("input1").value),
+  layer: document.getElementById("input2").value,
+ }
+ document.getElementById("debug").innerHTML = "1"
+ document.getElementById("text3").innerHTML = JSON.stringify(input.array)
+ document.getElementById("text1").innerHTML = toString(input)
+}
+
+function toString(input){
+    if (isNaN(input.array[0][1])) return "NaN";
+    if (!isFinite(input.array[0][1])) return "Infinity";
+    var s="";
+    if (!input.layer) s+="";
+    else if (input.layer<3) s+="M".repeat(input.layer);
+    else s+="M^"+input.layer+" ";
+    for (var i=input.array.length-1;i>=0;--i){
+      var e=input.array[i]
+      if (e[2]>0) {
+        var e2 = e[2]>1?e[2]:""
+        var e0 = e[0]>1?"_"+e[2]:""
+        if (e[1]<3) s+="J".repeat(e[1])+e2+e0+" ";
+        else s+="J"+e2+"^"+e[1]+e0+" ";
+      }else if (e[0]>1) {
+        var q=e[0]>=5?"{"+e[0]+"}":"^".repeat(e[0]);
+        if (e[1]>1) s+="(10"+q+")^"+e[1]+" ";
+        else if (e[1]==1) s+="10"+q;
+      }
+    }
+    var op0=getOperatorIndex(input,0,0);
+    var op1=getOperatorIndex(input,1,0);
+    if (!op1) s+=String(op0);
+    else if (op1<3) s+="e".repeat(op1-1)+Math.pow(10,op0-Math.floor(op0))+"e"+Math.floor(op0);
+    else if (op1<8) s+="e".repeat(op1)+op0;
+    else s+="(10^)^"+op1+" "+op0;
+    return s;
+  };
+
 function getOperatorIndex(array,i,i2=0){
     if (typeof i!="number") i=Number(i);
     if (typeof i2!="number") i2=Number(i2);
