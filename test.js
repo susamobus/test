@@ -1,3 +1,5 @@
+var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
+
 function Submit() {
  var input = document.getElementById("input1").value
  var layer = document.getElementById("input2").value
