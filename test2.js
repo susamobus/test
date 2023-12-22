@@ -45,8 +45,8 @@ function toString(input){
     document.getElementById("debug").innerHTML = "4"
     var op0=getOperator(input,0,0);
     var op1=getOperator(input,1,0);
+    document.getElementById("debug").innerHTML = "5"
     if (!op1) s+=String(op0);
-     document.getElementById("debug").innerHTML = "5"
     else if (op1<3) s+="e".repeat(op1-1)+Math.pow(10,op0-Math.floor(op0))+"e"+Math.floor(op0);
     else if (op1<8) s+="e".repeat(op1)+op0;
     else s+="(10^)^"+op1+" "+op0;
