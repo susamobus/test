@@ -25,12 +25,12 @@ function getOperatorIndex(array,i,i2=0){
         break;
       }
       if (a[mid][2]<i2) {
-          min=mid;
+          min=mid+1;
       }else if (a[mid][2]>i2) {
-          max=mid;
+          max=mid-1;
       }else {
-        if (a[mid][0]<i) min=mid;
-        if (a[mid][0]>i) max=mid;
+        if (a[mid][0]<i) min=mid+1;
+        if (a[mid][0]>i) max=mid-1;
       }
     }
     return a[min][2]==i2&&a[min][0]==i?min:min+0.5;
