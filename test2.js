@@ -11,7 +11,7 @@ function Submit4() {
 
 function getOperatorIndex(array,i,i2=0){
     if (typeof i!="number") i=Number(i);
-    if (typeof i2!="number") i=Number(i2);
+    if (typeof i2!="number") i2=Number(i2);
     var a=array;
     var min=0,max=a.length-1;
     if (a[max][2]<i2) return max+0.5;
@@ -25,12 +25,12 @@ function getOperatorIndex(array,i,i2=0){
         break;
       }
       if (a[mid][2]<i2) {
-          min=mid+1;
+          min=mid;
       }else if (a[mid][2]>i2) {
-          max=mid-1;
+          max=mid;
       }else {
-        if (a[mid][0]<i) min=mid+1;
-        if (a[mid][0]>i) max=mid-1;
+        if (a[mid][0]<i) min=mid;
+        if (a[mid][0]>i) max=mid;
       }
     }
     return a[min][2]==i2&&a[min][0]==i?min:min+0.5;
