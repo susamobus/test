@@ -90,3 +90,33 @@ function getOperator(input,i,i2=0){
     else return i===0&&i2===0?10:0;
   };
 
+  P.plus=P.add=function (other){
+    var x=this.clone();
+    other=new ExpantaNum(other);
+    if (ExpantaNum.debug>=ExpantaNum.NORMAL){
+      console.log(this+"+"+other);
+      if (!debugMessageSent) console.warn(expantaNumError+"Debug output via 'debug' is being deprecated and will be removed in the future!"),debugMessageSent=true;
+    }
+    if (x.sign==-1) return x.neg().add(other.neg()).neg();
+    if (other.sign==-1) return x.sub(other.neg());
+    if (x.eq(ExpantaNum.ZERO)) return other;
+    if (other.eq(ExpantaNum.ZERO)) return x;
+    if (x.isNaN()||other.isNaN()||x.isInfinite()&&other.isInfinite()&&x.eq(other.neg())) return ExpantaNum.NaN.clone();
+    if (x.isInfinite()) return x;
+    if (other.isInfinite()) return other;
+    var p=x.min(other);
+    var q=x.max(other);
+    var op0=q.operator(0,0);
+    var op1=q.operator(1,0);
+    var t;
+    if (q.gt(ExpantaNum.E_MAX_SAFE_INTEGER)||q.div(p).gt(ExpantaNum.MAX_SAFE_INTEGER)){
+      t=q;
+    }else if (!op1){
+      t=new ExpantaNum(x.toNumber()+other.toNumber());
+    }else if (op1==1){
+      var a=p.operator(1,0)?p.operator(0,0):Math.log10(p.operator(0,0));
+      t=new ExpantaNum([a+Math.log10(Math.pow(10,op0-a)+1),1]);
+    }
+    p=q=null;
+    return t;
+  };
