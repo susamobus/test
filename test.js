@@ -191,11 +191,13 @@ function normalize(array,layer){
      document.getElementById("debug").innerHTML = "6"
       for (i=1;i<x.array.length;++i){
         if (x.array[i][1]>MAX_SAFE_INTEGER){
+         document.getElementById("debug").innerHTML = "[1] MSI"
           if (i!=x.array.length-1&&x.array[i+1][0]==x.array[i][0]+1){
             x.array[i+1][1]++;
           }else{
             x.array.splice(i+1,0,[x.array[i][0]+1,1,x.array[i][2]]);
           }
+          document.getElementById("debug").innerHTML = "Array inserted"
           if (x.array[0][0]===0&&x.array[0][2]===0){
             x.array[0][1]=x.array[i][1]+1;
           }else{
