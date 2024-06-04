@@ -203,8 +203,10 @@ function normalize(array,layer){
           }else{
             x.array.splice(0,0,[0,x.array[i][1]+1,0]);
           }
+          document.getElementById("debug").innerHTML = "Array inserted2"
           x.array.splice(1,i);
           b=true;
+          document.getElementById("debug").innerHTML = "Array spliced"
         }
         if (x.array[i][0]>MAX_SAFE_INTEGER){
           if (i!=x.array.length-1&&x.array[i+1][2]==x.array[i][2]+1){
