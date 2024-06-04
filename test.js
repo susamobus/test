@@ -222,5 +222,6 @@ function normalize(array,layer){
       }
     }while(b);
     if (!x.array.length) x.array=[[0,0,0]];
+    document.getElementById("debug").innerHTML = "norm done"
     return x;
   };
