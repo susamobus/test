@@ -90,7 +90,7 @@ function getOperator(input,i,i2=0){
     else return i===0&&i2===0?10:0;
   };
 
-  P.plus=P.add=function (other){
+  function add(other){
     var x=this.clone();
     other=new ExpantaNum(other);
     if (ExpantaNum.debug>=ExpantaNum.NORMAL){

@@ -125,6 +125,7 @@ function normalize(array,layer){
       if (e[0]!==0&&!Number.isInteger(e[1])) e[1]=Math.floor(e[1]);
     }
     do{
+      console.log(x.array)
       b=false;
     // Updated
       x.array.sort(function (a,b){return a[2]-b[2]===0?a[0]-b[0]:a[2]-b[2];});
@@ -142,7 +143,7 @@ function normalize(array,layer){
         else x.array=[[0,10,0],[1,1,Math.round(x.array[0][1])]];
         b=true;
       }
-      if (x.array.length<100&&x.array[0][0]!==0) x.array.unshift([0,10,0]);
+      if (x.array.length<100&&(x.array[0][0]!==0||x.array[0][2]!==0)) x.array.unshift([0,10,0]);
       for (i=0;i<x.array.length-1;++i){
         if (x.array[i][0]==x.array[i+1][0]&&x.array[i][2]==x.array[i+1][2]){ //Upd
           x.array[i][1]+=x.array[i+1][1];
@@ -178,7 +179,7 @@ function normalize(array,layer){
         }
         x.array[0][1]=10;
       }
-      if (x.array.length>=2&&x.array[0][0]===0&&x.array[0][2]===0&&x.array[1][0]!=1){
+      if (x.array.length>=2&&x.array[0][0]===0&&x.array[0][2]===0&&x.array[1][0]!=1&&x.array[0][1]!=10){
         if (x.array[0][1]) x.array.splice(1,0,[x.array[1][0]-1,x.array[0][1],x.array[1][2]]); //Upd
         x.array[0][1]=1;
         if (x.array[2][1]>1){
@@ -197,7 +198,6 @@ function normalize(array,layer){
           }else{
             x.array.splice(i+1,0,[x.array[i][0]+1,1,x.array[i][2]]);
           }
-          document.getElementById("debug").innerHTML = "Array inserted"
           if (x.array[0][0]===0&&x.array[0][2]===0){
             x.array[0][1]=x.array[i][1]+1;
           }else{
@@ -205,6 +205,7 @@ function normalize(array,layer){
           }
           document.getElementById("debug").innerHTML = "Array inserted2"
           x.array.splice(1,i);
+          i--;
           b=true;
           document.getElementById("debug").innerHTML = "Array spliced"
         }
