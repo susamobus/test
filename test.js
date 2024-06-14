@@ -139,7 +139,8 @@ function normalize(array,layer){
         b=true;
       }else if (x.layer&&x.array.length==1&&x.array[0][0]===0){
         x.layer--;
-        if (x.array[0][1]===0) x.array=[[0,10,0]];
+        if (x.array[0][0]===0) x.array=[[0,1,0]];
+        else if (x.array[0][1]===0) x.array=[[0,10,0]];
         else x.array=[[0,10,0],[1,1,Math.round(x.array[0][1])]];
         b=true;
       }
@@ -160,6 +161,16 @@ function normalize(array,layer){
           x.array.splice(1,0,[1,1,0]);
         }
         x.array[0][1]=Math.log10(x.array[0][1]);
+        b=true;
+      }
+      while (x.array.length>=2&&x.array[0][0]===0&&x.array[1][0]==1&&x.array[1][1]&&x.array[1][2]>0&&x.array[0][2]===0){
+        x.array[0][1]=10;
+        x.array.splice(0,0,[x.array[0][1],1,x.array[1][2]-1]);
+        if (x.array[2][1]>1){
+          x.array[2][1]--;
+        }else{
+          x.array.splice(2,1);
+        }
         b=true;
       }
       while (x.array.length>=2&&x.array[0][0]===0&&x.array[0][1]<Math.log10(MAX_SAFE_INTEGER)&&x.array[1][0]==1&&x.array[1][1]&&x.array[1][2]==0&&x.array[0][2]==0){
