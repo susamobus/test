@@ -139,9 +139,11 @@ function normalize(array,layer){
         b=true;
       }else if (x.layer&&x.array.length==1&&x.array[0][0]===0){
         x.layer--;
-        if (x.array[0][0]===0) x.array=[[0,1,0]];
-        else if (x.array[0][1]===0) x.array=[[0,10,0]];
-        else x.array=[[0,10,0],[1,1,Math.round(x.array[0][1])]];
+        if (x.array[0][1]===0) {
+          x.array=[[0,1,0]];
+        } else if (x.array[0][1]===1) {
+          x.array=[[0,10,0]];
+        } else x.array=[[0,10,0],[1,1,Math.round(x.array[0][1])]];
         b=true;
       }
       if (x.array.length<100&&(x.array[0][0]!==0||x.array[0][2]!==0)) x.array.unshift([0,10,0]);
@@ -190,7 +192,7 @@ function normalize(array,layer){
         }
         x.array[0][1]=10;
       }
-      if (x.array.length>=2&&x.array[0][0]===0&&x.array[0][2]===0&&x.array[1][0]!=1&&x.array[0][1]!=10){
+      if (x.array.length>=2&&x.array[0][0]===0&&x.array[0][2]===0&&x.array[1][0]>1&&x.array[0][1]!=10){
         if (x.array[0][1]) x.array.splice(1,0,[x.array[1][0]-1,x.array[0][1],x.array[1][2]]); //Upd
         x.array[0][1]=1;
         if (x.array[2][1]>1){
