@@ -192,7 +192,7 @@ function normalize(array,layer){
         }
         x.array[0][1]=10;
       }
-      if (x.array.length>=2&&x.array[0][0]===0&&x.array[0][2]===0&&x.array[1][0]>1&&x.array[0][1]!=10){
+      if (x.array.length>=2&&x.array[0][0]===0&&x.array[1][0]>1){
         if (x.array[0][1]) x.array.splice(1,0,[x.array[1][0]-1,x.array[0][1],x.array[1][2]]); //Upd
         x.array[0][1]=1;
         if (x.array[2][1]>1){
