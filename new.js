@@ -355,8 +355,8 @@
     var p=x.min(other);
     var q=x.max(other);
     var n=other.gt(x);
-    var op0=q.operator(0);
-    var op1=q.operator(1);
+    var op0=q.operator(0,0);
+    var op1=q.operator(1,0);
     var t;
     if (q.gt(ExpantaNum.E_MAX_SAFE_INTEGER)||q.div(p).gt(ExpantaNum.MAX_SAFE_INTEGER)){
       t=q;
@@ -364,8 +364,8 @@
     }else if (!op1){
       t=new ExpantaNum(x.toNumber()-other.toNumber());
     }else if (op1==1){
-      var a=p.operator(1)?p.operator(0):Math.log10(p.operator(0));
-      t=new ExpantaNum([a+Math.log10(Math.pow(10,op0-a)-1),1]);
+      var a=p.operator(1,0)?p.operator(0,0):Math.log10(p.operator(0,0));
+      t=new ExpantaNum([a+Math.log10(Math.pow(10,op0-a)-1),1,0]);
       t=n?t.neg():t;
     }
     p=q=null;
@@ -1391,10 +1391,10 @@
       return ExpantaNum.fromJSON(input);
     }
     var x=new ExpantaNum();
-    x.array=[[0,0]];
+    x.array=[[0,0,0]];
     if (!isExpantaNum.test(input)){
       console.warn(expantaNumError+"Malformed input: "+input);
-      x.array=[[0,NaN]];
+      x.array=[[0,NaN,0]];
       return x;
     }
     var negateIt=false;

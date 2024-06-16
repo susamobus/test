@@ -2,7 +2,8 @@ var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
 
 function NewSubmit() {
   let input = ProcessArray(document.getElementById("input1").value);
-  document.getElementById("text1").innerHTML = JSON.stringify(ExpantaNum.fromArray(input));
+  let input2 = ProcessArray(document.getElementById("2input1").value);
+  document.getElementById("text1").innerHTML =  JSON.stringify(ExpantaNum.fromArray(input).add(ExpantaNum.fromArray(input2)));
 }
 
 function ProcessArray(array) {
