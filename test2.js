@@ -107,16 +107,16 @@ function getOperator(input,i,i2=0){
     if (other.isInfinite()) return other;
     var p=x.min(other);
     var q=x.max(other);
-    var op0=q.operator(0,0);
-    var op1=q.operator(1,0);
+    var op0=getOperator(q,0,0);
+    var op1=getOperator(q,1,0);
     var t;
-    if (q.gt(ExpantaNum.E_MAX_SAFE_INTEGER)||q.div(p).gt(ExpantaNum.MAX_SAFE_INTEGER)){
+    if (q.gt(E_MAX_SAFE_INTEGER)||q.div(p).gt(MAX_SAFE_INTEGER)){
       t=q;
     }else if (!op1){
       t=new ExpantaNum(x.toNumber()+other.toNumber());
     }else if (op1==1){
-      var a=p.operator(1,0)?p.operator(0,0):Math.log10(p.operator(0,0));
-      t=new ExpantaNum([a+Math.log10(Math.pow(10,op0-a)+1),1]);
+      var a=getOperator(p,1,0)?getOperator(p,0,0):Math.log10(getOperator(p,0,0));
+      t= [[a+Math.log10(Math.pow(10,op0-a)+1),1]];
     }
     p=q=null;
     return t;

@@ -1,5 +1,10 @@
 var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER
 
+function NewSubmit() {
+  let input = ProcessArray(document.getElementById("input1").value);
+  document.getElementById("text1").innerHTML = JSON.stringify(ExpantaNum.fromArray(input));
+}
+
 function ProcessArray(array) {
  const trimmedString = array.slice(2, -2);
  const arrayStrings = trimmedString.split("],[");
@@ -216,7 +221,6 @@ function normalize(array,layer){
           }else{
             x.array.splice(0,0,[0,x.array[i][1]+1,0]);
           }
-          document.getElementById("debug").innerHTML = "Array inserted2"
           x.array.splice(1,i);
           i--;
           b=true;
